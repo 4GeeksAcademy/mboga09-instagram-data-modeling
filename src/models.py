@@ -22,9 +22,9 @@ class Follower(Base):
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    user_from_id = Column(Integer, ForeignKey('user.id'))
+    user_from_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     user = relationship(User)
-    user_to_id = Column(Integer, ForeignKey('user.id'))
+    user_to_id = Column(Integer, ForeignKey('user.id'), nullable=False)
 
     def to_dict(self):
         return {}
@@ -34,7 +34,7 @@ class Post(Base):
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     user = relationship(User)
 
     def to_dict(self):
@@ -46,9 +46,9 @@ class Comment(Base):
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     comment_text = Column(String(500), nullable=False)
-    author_id = Column(Integer, ForeignKey('user.id'))
+    author_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     user = relationship(User)
-    post_id = Column(Integer, ForeignKey('post.id'))
+    post_id = Column(Integer, ForeignKey('post.id'), nullable=False)
 
     def to_dict(self):
         return {}
@@ -60,7 +60,7 @@ class Media(Base):
     id = Column(Integer, primary_key=True)
     type = Column(String(250), nullable=False)
     url = Column(String(500), nullable=False)
-    post_id = Column(Integer, ForeignKey('post.id'))
+    post_id = Column(Integer, ForeignKey('post.id'), nullable=False)
     user = relationship(Post)
 
     def to_dict(self):
